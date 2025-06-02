@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import * as S from "./MainPage.styled";
 import axios from "axios";
 import { useState } from "react";
+import Poster from "../../components/Poster";
 
 interface Product {
   id: number;
@@ -28,18 +29,13 @@ function MainPage() {
   return (
     <>
       <S.MainWrapper>
-        <S.Hero>
-          <S.Title>당신의 스타일을 위한 쇼핑몰, VIVORA</S.Title>
-          <S.Description>
-            새로운 계절, 새로운 스타일. 지금 시작해보세요!
-          </S.Description>
-          <S.SearchBar
-            type="text"
-            placeholder="상품명을 입력하세요..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </S.Hero>
+        <Poster />
+                      <S.SearchBar
+                        type="text"
+                        placeholder="상품명을 입력하세요..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                      />
         {isLoading && <p>로딩 중...</p>}
         {error && <p>상품을 불러오는 데 실패했습니다.</p>}
         <S.ProductGrid>
