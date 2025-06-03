@@ -19,12 +19,16 @@ function Header() {
     }
   };
 
+  const goToWishList = () => {
+    navigate('/mypage?menu=관심 상품');
+  };
+
   return (
     <S.Header>
       <S.HeaderItemWrapper>
         <S.HeaderButtonWrapper>
           <S.HeaderButton onClick={() => navigate('/mypage')}>마이페이지</S.HeaderButton>
-          <S.HeaderButton>관심</S.HeaderButton>
+          <S.HeaderButton onClick={goToWishList}>관심</S.HeaderButton>
           <S.HeaderButton>알림</S.HeaderButton>
           <S.HeaderButton onClick={handleAuthClick}>
             {userId ? '로그아웃' : '로그인'}

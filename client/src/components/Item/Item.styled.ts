@@ -8,14 +8,14 @@ export const ProductGrid = styled.section`
   margin-top: 40px;
 `;
 
-export const ProductCard = styled.div`
+export const ProductCard = styled.button`
   display: flex;
   flex-direction: column;
   background: #fff;
-  border-radius: 12px;
   overflow: hidden;
   text-align: center;
   gap: 12px;
+  border: none;;
 `;
 
 export const ProductItemWrapper = styled.div`
@@ -25,6 +25,7 @@ export const ProductItemWrapper = styled.div`
   overflow: hidden;
 
   img {
+    display: flex;
     width: 100%;
     height: 100%;
     object-fit: cover;

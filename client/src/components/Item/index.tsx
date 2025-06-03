@@ -4,18 +4,19 @@ import * as S from './Item.styled';
 import BookMarkIcon from '@/assets/svg/book-mark.svg?react';
 import { useUserStore } from '../../stores/useUserStore';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Product {
   id: number;
   name: string;
   price: string;
-  image: string;
   brand: string;
   image_url: string;
   bookmarked: boolean;
 }
 
 function Item({ category }: { category: { id: number; name: string } }) {
+  const navigate = useNavigate();
   const userId = useUserStore((state) => state.userId);
   const { data: products = [], refetch } = useQuery<Product[]>({
     queryKey: ['products', category.name, userId],
@@ -64,27 +65,26 @@ function Item({ category }: { category: { id: number; name: string } }) {
     }
   };
 
-  // 실제 렌더링 시 상태 결정
   const isBookmarked = (product: Product) =>
     bookmarkState[product.id] !== undefined ? bookmarkState[product.id] : product.bookmarked;
 
   return (
     <S.ProductGrid>
-      {products.map((product) => (
-        <S.ProductCard key={product.id}>
+      {products.map(({ id, image_url, name, brand, price, bookmarked }) => (
+        <S.ProductCard key={id} onClick={() => navigate(`/detail/${id}`)}>
           <S.ProductItemWrapper>
-            <img src={product.image_url} alt={product.name} />
+            <img src={image_url} alt={name} />
             <S.BookMark
-              onClick={() => handleToggleBookmark(product.id)}
-              $active={isBookmarked(product)}
+              onClick={() => handleToggleBookmark(id)}
+              $active={isBookmarked({ id, image_url, name, brand, price, bookmarked })}
             >
               <BookMarkIcon />
             </S.BookMark>
           </S.ProductItemWrapper>
           <S.ItemDescription>
-            <S.ProductTitle>{product.brand ?? 'Unknown Brand'}</S.ProductTitle>
-            <S.ProductTitle>{product.name}</S.ProductTitle>
-            <S.ProductPrice>{Number(product.price).toFixed(0)}원</S.ProductPrice>
+            <S.ProductTitle>{brand ?? 'Unknown Brand'}</S.ProductTitle>
+            <S.ProductTitle>{name}</S.ProductTitle>
+            <S.ProductPrice>{Number(price).toFixed(0)}원</S.ProductPrice>
           </S.ItemDescription>
         </S.ProductCard>
       ))}

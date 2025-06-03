@@ -30,11 +30,13 @@ export const SubTitle = styled.h3`
   margin-bottom: 16px;
 `;
 
-export const ItemTitle = styled.h4`
+export const ItemTitle = styled.h4<{ $active: boolean }>`
   ${typo['body-3-m']}
-  color: #25374C;
+
   margin-bottom: 8px;
   cursor: pointer;
+  color: #021730;
+  font-weight: ${({ $active }) => ($active ? 'bold' : 'normal')};
 `;
 
 export const ContentSection = styled.section`
