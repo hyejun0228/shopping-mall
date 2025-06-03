@@ -3,9 +3,11 @@ import HamburgerIcon from '@/assets/svg/hamburger.svg?react';
 import ShoppingBagIcon from '@/assets/svg/shopping-bag.svg?react';
 import SearchIcon from '@/assets/svg/search.svg?react';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function Header() {
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <S.Header>
       <S.HeaderItemWrapper>
@@ -19,7 +21,18 @@ function Header() {
           </S.HeaderButton>
           <S.HeaderButton>관심</S.HeaderButton>
           <S.HeaderButton>알림</S.HeaderButton>
-          <S.HeaderButton>로그아웃</S.HeaderButton>
+          <S.HeaderButton
+            onClick={() => {
+              if (isLoggedIn) {
+                setIsLoggedIn(false);
+                navigate('/');
+              } else {
+                navigate('/auth/login');
+              }
+            }}
+          >
+            {isLoggedIn ? '로그아웃' : '로그인'}
+          </S.HeaderButton>
         </S.HeaderButtonWrapper>
       </S.HeaderItemWrapper>
 
