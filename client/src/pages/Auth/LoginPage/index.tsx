@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import * as S from './LoginPage.styled';
 import TextField from '../../../components/common/TextField';
 import { useNavigate } from 'react-router-dom';
+import { useUserStore } from '../../../stores/useUserStore';
 
 interface LoginForm {
   email: string;
@@ -10,6 +11,8 @@ interface LoginForm {
 
 function LoginPage() {
   const navigate = useNavigate();
+  const setUserId = useUserStore((state: { setUserId: (id: number) => void }) => state.setUserId);
+
   const {
     register,
     handleSubmit,
@@ -38,12 +41,20 @@ function LoginPage() {
       throw new Error(result.error || '로그인에 실패했습니다.');
     }
 
-    return result;
+    return result; // ← 여기서 user_id 포함된 결과 반환
   };
 
   const onSubmit = async (data: LoginForm) => {
     try {
-      await loginUser(data);
+      const result = await loginUser(data);
+      console.log('✅ 로그인 응답:', result);
+
+      if (result.user_id) {
+        setUserId(result.user_id);
+      } else {
+        throw new Error('로그인 정보에 user_id가 없습니다.');
+      }
+
       navigate('/mypage');
     } catch (err: any) {
       alert(err.message);

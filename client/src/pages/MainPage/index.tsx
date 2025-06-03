@@ -1,13 +1,13 @@
 import * as S from './MainPage.styled';
 import Poster from '../../components/Poster';
-import Item from '../../components/Item';
+import ItemCategory from '../../components/ItemCategory';
 
 function MainPage() {
   return (
     <>
       <S.MainWrapper>
         <Poster />
-        <Item />
+        <ItemCategory />
       </S.MainWrapper>
     </>
   );

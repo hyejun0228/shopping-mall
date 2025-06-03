@@ -1,48 +1,65 @@
 import * as S from './WishListPage.styled';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useUserStore } from '../../../stores/useUserStore';
 
-const MOCK_DATA = [
-  {
-    id: 1,
-    productName: 'New Balance 574 Grey',
-    size: '260',
-    price: '100,000원',
-    imageUrl: 'https://example.com/image1.jpg',
-  },
-  {
-    id: 2,
-    productName: 'Nike Air Max 270',
-    size: '270',
-    price: '120,000원',
-    imageUrl: 'https://example.com/image2.jpg',
-  },
-  {
-    id: 3,
-    productName: 'Adidas Ultraboost 21',
-    size: '250',
-    price: '150,000원',
-    imageUrl: 'https://example.com/image3.jpg',
-  },
-];
+interface WishItem {
+  id: number;
+  productName: string;
+  size?: string;
+  price: string;
+  imageUrl: string;
+  bookmarked: boolean;
+  name: string;
+  brand?: string;
+  image_url: string;
+  // 필요에 따라 필드 추가
+}
 
 function WishListPage() {
+  const userId = useUserStore((state) => state.userId);
+  const [wishList, setWishList] = useState<WishItem[]>([]);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    const fetchBookmarkedProducts = async () => {
+      try {
+        // 모든 카테고리 상품을 가져오는 API 호출 (category_id=0 또는 생략 가능하게 서버 수정 필요)
+        const res = await axios.get(
+          `http://localhost/server/product/get_products.php?user_id=${userId}&category_id=0`
+        );
+        // bookmarked가 true인 상품만 필터링
+        const bookmarkedProducts = res.data.filter((p: WishItem) => p.bookmarked);
+        setWishList(bookmarkedProducts);
+      } catch (error) {
+        console.error('관심 상품 불러오기 실패', error);
+      }
+    };
+
+    fetchBookmarkedProducts();
+  }, [userId]);
+
   return (
     <S.Container>
       <S.Title>관심 상품</S.Title>
       <S.ItemWishWrapper>
-        {MOCK_DATA.map((item) => (
+        {wishList.length === 0 && <div>북마크한 상품이 없습니다.</div>}
+        {wishList.map((item) => (
           <S.Item key={item.id}>
             <S.Wrapper>
               <S.ImageWrapper>
-                {/* <img src={item.imageUrl} alt={item.productName} /> */}
+                <img src={item.image_url} alt={item.name} />
               </S.ImageWrapper>
               <S.bodyWrapper>
-                <S.title>{item.productName}</S.title>
-                <S.size>SIZE : {item.size}</S.size>
+                <S.title>{item.brand ?? 'Unknown Brand'}</S.title>
+                <S.title>{item.name}</S.title>
+                {item.size && <S.size>SIZE : {item.size}</S.size>}
               </S.bodyWrapper>
             </S.Wrapper>
             <S.price>
               <div>구매가</div>
-              <strong>{item.price}</strong>
+              <strong>{Number(item.price).toFixed(0)}원</strong>
             </S.price>
           </S.Item>
         ))}
