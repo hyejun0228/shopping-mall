@@ -44,7 +44,6 @@ function LoginPage() {
   const onSubmit = async (data: LoginForm) => {
     try {
       await loginUser(data);
-      alert('로그인 성공!');
       navigate('/mypage');
     } catch (err: any) {
       alert(err.message);

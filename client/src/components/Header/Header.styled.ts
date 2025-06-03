@@ -32,10 +32,14 @@ export const HeaderItemWrapper = styled.div`
   width: 100%;
 `;
 
-export const HeaderTitle = styled.h1`
+export const HeaderTitle = styled.button`
   ${typo['subtitle-1-b']}
   color: #021730;
   cursor: pointer;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
 `;
 
 export const HeaderSubTitle = styled.h2`

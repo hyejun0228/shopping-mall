@@ -57,7 +57,6 @@ function SignUpPage() {
       }
 
       await registerUser(data);
-      alert('회원가입 성공! 로그인 페이지로 이동합니다.');
       navigate('/auth/login');
     } catch (err: any) {
       alert(err.message);

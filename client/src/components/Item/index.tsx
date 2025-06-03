@@ -17,7 +17,7 @@ function Item() {
   } = useQuery<Product[]>({
     queryKey: ['products'],
     queryFn: async () => {
-      const res = await axios.get<Product[]>('http://localhost/project/get_products.php');
+      const res = await axios.get<Product[]>('http://localhost/server/product/get_products.php');
       return res.data;
     },
   });

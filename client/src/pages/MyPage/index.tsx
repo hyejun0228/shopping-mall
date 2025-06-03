@@ -2,6 +2,7 @@ import * as S from './MyPage.styled';
 import { useState } from 'react';
 import OrderHistoryPage from './OrderHistoryPage';
 import WishListPage from './WishListPage';
+import LoginInfoPage from './LoginInfoPage';
 
 function MyPage() {
   const [selectedMenu, setSelectedMenu] = useState('구매 내역');
@@ -23,6 +24,10 @@ function MyPage() {
         <S.ContentSection>
           {selectedMenu === '구매 내역' && <OrderHistoryPage />}
           {selectedMenu === '관심 상품' && <WishListPage />}
+          {selectedMenu === '리뷰 쓰기' && <div>리뷰 쓰기 페이지</div>}
+          {selectedMenu === '로그인 정보' && <LoginInfoPage />}
+          {selectedMenu === '주소록' && <div>주소록 페이지</div>}
+          {selectedMenu === '결제 정보' && <div>결제 정보 페이지</div>}
         </S.ContentSection>
       </S.SectionWrapper>
     </S.Container>
