@@ -1,16 +1,35 @@
 import styled from 'styled-components';
 import typo from '../../../styles/typo';
 
-export const Container = styled.div`
+interface DescriptionWrapperProps {
+  isMobile?: boolean;
+}
+
+export const Container = styled.div<DescriptionWrapperProps>`
   padding: 0 40px;
   background-color: #f9f9f9;
   min-height: calc(100vh - 160px);
+
+  ${({ isMobile }) =>
+    isMobile &&
+    `
+    padding: 0px 24px 30px 24px;
+    width: 100%;
+  `}
 `;
 
-export const Title = styled.h2`
+export const Title = styled.h2<DescriptionWrapperProps>`
   ${typo['subtitle-1-b']};
   color: #021730;
   margin: 0 0 24px 0;
+
+  ${({ isMobile }) =>
+    isMobile &&
+    `
+    font-size: 20px;
+    line-height: 32px;
+    margin: 16px 0 16px 0;
+  `}
 `;
 
 export const ItemListWrapper = styled.div`

@@ -4,11 +4,13 @@ import AddAddressModal from './AddAddressModal';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { deleteAddress, fetchAddresses, setMainAddress } from '../../../api/address';
 import { useUserStore } from '../../../hooks/stores/useUserStore';
+import useMediaQuery from '../../../hooks/utils/useMediaQuery';
 
 function AddressPage() {
   const queryClient = useQueryClient();
   const { userId } = useUserStore((state) => state);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isMobile = useMediaQuery({ maxWidth: 860 });
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
@@ -34,9 +36,9 @@ function AddressPage() {
   });
 
   return (
-    <S.Container>
-      <S.HeaderWrapper>
-        <S.Title>주소록</S.Title>
+    <S.Container isMobile={isMobile}>
+      <S.HeaderWrapper isMobile={isMobile}>
+        <S.Title isMobile={isMobile}>주소록</S.Title>
         <S.Button type="button" onClick={handleOpenModal}>
           새 주소 추가하기
         </S.Button>

@@ -3,6 +3,7 @@ import * as S from './LoginInfoPage.styled';
 import type { Order, OrderItem } from '../../../api/order/entity';
 import { useUserStore } from '../../../hooks/stores/useUserStore';
 import { fetchOrders } from '../../../api/order';
+import useMediaQuery from '../../../hooks/utils/useMediaQuery';
 
 interface User {
   id: number;
@@ -11,6 +12,7 @@ interface User {
 }
 
 function LoginInfoPage() {
+  const isMobile = useMediaQuery({ maxWidth: 860 });
   const { userId } = useUserStore((state) => state);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -56,8 +58,8 @@ function LoginInfoPage() {
   if (!user) return <p>유저 정보를 불러올 수 없습니다.</p>;
 
   return (
-    <S.Container>
-      <S.Title>로그인 정보</S.Title>
+    <S.Container isMobile={isMobile}>
+      <S.Title isMobile={isMobile}>로그인 정보</S.Title>
       <S.ItemListWrapper>
         <S.InfoWrapper>
           <S.InfoImageWrapper>
@@ -69,7 +71,7 @@ function LoginInfoPage() {
           </S.InfoItemWrapper>
         </S.InfoWrapper>
       </S.ItemListWrapper>
-      <S.Title>구매 내역</S.Title>
+      <S.Title isMobile={isMobile}>구매 내역</S.Title>
       <S.ItemListWrapper>
         {orders &&
           orders.map((order) => (

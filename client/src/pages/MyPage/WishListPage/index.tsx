@@ -2,6 +2,7 @@ import * as S from './WishListPage.styled';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useUserStore } from '../../../hooks/stores/useUserStore';
+import useMediaQuery from '../../../hooks/utils/useMediaQuery';
 
 interface WishItem {
   id: number;
@@ -18,6 +19,7 @@ interface WishItem {
 function WishListPage() {
   const userId = useUserStore((state) => state.userId);
   const [wishList, setWishList] = useState<WishItem[]>([]);
+  const isMobile = useMediaQuery({ maxWidth: 860 });
 
   useEffect(() => {
     if (!userId) return;
@@ -38,8 +40,8 @@ function WishListPage() {
   }, [userId]);
 
   return (
-    <S.Container>
-      <S.Title>관심 상품</S.Title>
+    <S.Container isMobile={isMobile}>
+      <S.Title isMobile={isMobile}>관심 상품</S.Title>
       <S.ItemWishWrapper>
         {wishList.length === 0 && <div>북마크한 상품이 없습니다.</div>}
         {wishList.map((item) => (

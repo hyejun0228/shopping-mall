@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import { useUserStore } from '../../../hooks/stores/useUserStore';
 import { fetchOrders } from '../../../api/order';
 import type { Order, OrderItem } from '../../../api/order/entity';
+import useMediaQuery from '../../../hooks/utils/useMediaQuery';
 
 export default function OrderHistoryPage() {
   const { userId } = useUserStore((state) => state);
   const [orders, setOrders] = useState<Order[]>([]);
+  const isMobile = useMediaQuery({ maxWidth: 860 });
 
   useEffect(() => {
     const getOrders = async () => {
@@ -23,8 +25,8 @@ export default function OrderHistoryPage() {
   }, [userId]);
 
   return (
-    <S.Container>
-      <S.Title>구매 내역</S.Title>
+    <S.Container isMobile={isMobile}>
+      <S.Title isMobile={isMobile}>구매 내역</S.Title>
       <S.ItemListWrapper>
         {orders &&
           orders.map((order) => (
