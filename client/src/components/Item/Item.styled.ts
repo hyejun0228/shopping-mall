@@ -27,13 +27,13 @@ export const ProductItemWrapper = styled.div`
   border-radius: 12px;
 `;
 
-
 export const ProductImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 `;
+
 
 
 export const BookMark = styled.div<{ $active: boolean }>`

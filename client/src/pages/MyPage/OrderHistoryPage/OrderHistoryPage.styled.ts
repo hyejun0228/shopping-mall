@@ -57,10 +57,16 @@ export const ItemBody = styled.div`
 
 export const ImageWrapper = styled.div`
   display: flex;
-  background-color: #D6DAE0;
-  border-radius: 8px;
-  height: 80px;
   width: 80px;
+  height: 74px;
+  border-radius: 8px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 export const DescriptionWrapper = styled.div`

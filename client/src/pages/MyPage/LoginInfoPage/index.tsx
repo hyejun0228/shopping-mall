@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import * as S from './LoginInfoPage.styled';
+import type { Order, OrderItem } from '../../../api/order/entity';
+import { useUserStore } from '../../../hooks/stores/useUserStore';
+import { fetchOrders } from '../../../api/order';
 
 interface User {
   id: number;
@@ -8,15 +11,17 @@ interface User {
 }
 
 function LoginInfoPage() {
+  const { userId } = useUserStore((state) => state);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
         const res = await fetch('http://localhost/server/router.php?action=me', {
           method: 'GET',
-          credentials: 'include', // 세션 쿠키를 포함하려면 꼭 필요!
+          credentials: 'include',
         });
 
         if (!res.ok) throw new Error();
@@ -32,6 +37,20 @@ function LoginInfoPage() {
 
     fetchUserInfo();
   }, []);
+
+  useEffect(() => {
+    const getOrders = async () => {
+      try {
+        const data = await fetchOrders(Number(userId));
+        setOrders(data);
+        console.log('주문 내역 불러오기 성공:', data);
+      } catch (error) {
+        console.error('주문 내역 불러오기 실패:', error);
+      }
+    };
+
+    if (userId) getOrders();
+  }, [userId]);
 
   if (loading) return <p>불러오는 중...</p>;
   if (!user) return <p>유저 정보를 불러올 수 없습니다.</p>;
@@ -51,6 +70,31 @@ function LoginInfoPage() {
         </S.InfoWrapper>
       </S.ItemListWrapper>
       <S.Title>구매 내역</S.Title>
+      <S.ItemListWrapper>
+        {orders &&
+          orders.map((order) => (
+            <S.Item key={order.id}>
+              <S.ItemHeader>
+                <div>결제번호: O-OR{order.id.toString().padStart(8, '0')}</div>
+                <span>결제일: {order.created_at.split(' ')[0]}</span>
+              </S.ItemHeader>
+
+              {order.items?.map((item: OrderItem) => (
+                <S.ItemBody key={item.id}>
+                  <S.ImageWrapper>
+                    <img src={item.image_url} alt={item.name} />
+                  </S.ImageWrapper>
+                  <S.DescriptionWrapper>
+                    <div>{item.name}</div>
+                    <div>수량: {item.quantity}</div>
+                    <div>가격: {(item.price * item.quantity).toLocaleString()}원</div>
+                  </S.DescriptionWrapper>
+                  <S.Result>결제 완료</S.Result>
+                </S.ItemBody>
+              ))}
+            </S.Item>
+          ))}
+      </S.ItemListWrapper>
     </S.Container>
   );
 }

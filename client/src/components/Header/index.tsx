@@ -1,5 +1,4 @@
 import * as S from './Header.styled';
-import HamburgerIcon from '@/assets/svg/hamburger.svg?react';
 import ShoppingBagIcon from '@/assets/svg/shopping-bag.svg?react';
 import SearchIcon from '@/assets/svg/search.svg?react';
 import { useNavigate } from 'react-router-dom';

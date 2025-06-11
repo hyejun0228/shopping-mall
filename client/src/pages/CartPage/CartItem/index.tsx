@@ -17,11 +17,14 @@ interface Props {
     image_url: string;
   };
   onRemove: (productId: number) => void;
+  checked: boolean;
+  onCheck: () => void;
 }
 
-function CartItem({ product, onRemove }: Props) {
+function CartItem({ product, onRemove, checked, onCheck }: Props) {
   const queryClient = useQueryClient();
   const { userId } = useUserStore((state) => state);
+
   const handleRemove = useCallback(async () => {
     try {
       await removeFromCart(Number(userId), product.product_id);
@@ -30,10 +33,18 @@ function CartItem({ product, onRemove }: Props) {
     } catch (err) {
       console.error('장바구니 삭제 실패:', err);
     }
-  }, [userId, product.product_id, onRemove]);
+  }, [userId, product.product_id, onRemove, queryClient]);
 
   return (
     <S.ItemWrapper>
+      <S.InputWrapper>
+        <S.HeaderWrapper>
+          <S.ItemCheckbox type="checkbox" checked={checked} onChange={onCheck} />
+          <S.DeleteButton onClick={handleRemove} type="button">
+            <CloseIcon />
+          </S.DeleteButton>
+        </S.HeaderWrapper>
+      </S.InputWrapper>
       <S.InfoWrapper>
         <S.Image src={product.image_url} alt={product.name} />
         <S.Info>
@@ -41,9 +52,6 @@ function CartItem({ product, onRemove }: Props) {
           <S.Name>{product.name}</S.Name>
           <S.Description>{product.description}</S.Description>
         </S.Info>
-        <S.DeleteButton onClick={handleRemove} type="button">
-          <CloseIcon />
-        </S.DeleteButton>
       </S.InfoWrapper>
       <S.PriceWrapper>
         <S.Wrapper>

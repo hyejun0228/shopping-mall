@@ -67,13 +67,61 @@ export const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
+export const InputWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: space-between;
+`;
+
+export const HeaderWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
+
 export const DeleteButton = styled.button`
+  display: flex;
   border: none;
   background: none;
   cursor: pointer;
   padding: 0;
-  margin-bottom: 44px;
   z-index: 10;
   width: 24px;
   height: 24px;
+`;
+
+
+export const ItemCheckbox = styled.input.attrs({ type: 'checkbox' })`
+  display: flex;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+
+  &:hover {
+    border-color: #888;
+  }
+
+  &:checked {
+    background-color: #021730;
+    border-color: #021730;
+  }
+
+  &:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -60%) rotate(45deg);
+  }
 `;
