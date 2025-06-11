@@ -33,7 +33,6 @@ function Header() {
         <S.HeaderButtonWrapper>
           <S.HeaderButton onClick={() => navigate('/mypage')}>마이페이지</S.HeaderButton>
           <S.HeaderButton onClick={goToWishList}>관심</S.HeaderButton>
-          <S.HeaderButton>알림</S.HeaderButton>
           <S.HeaderButton onClick={handleAuthClick}>
             {userId ? '로그아웃' : '로그인'}
           </S.HeaderButton>
@@ -48,8 +47,7 @@ function Header() {
           <SearchIcon />
           <S.IconButton onClick={goToCart} type="button">
             <ShoppingBagIcon />
-          </S.IconButton>
-          <HamburgerIcon />
+          </S.IconButton>{' '}
         </S.IconWrapper>
       </S.HeaderTitleWrapper>
     </S.Header>
