@@ -28,7 +28,7 @@ function SignUpPage() {
   });
 
   const registerUser = async (data: { username: string; email: string; password: string }) => {
-    const response = await fetch('http://localhost/server/router.php?action=register', {
+    const response = await fetch('http://localhost/shopping-mall/server/router.php?action=register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

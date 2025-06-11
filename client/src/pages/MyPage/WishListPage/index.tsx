@@ -27,7 +27,7 @@ function WishListPage() {
     const fetchBookmarkedProducts = async () => {
       try {
         const res = await axios.get(
-          `http://localhost/server/product/get_products.php?user_id=${userId}&category_id=0`
+          `http://localhost/shopping-mall/server/product/get_products.php?user_id=${userId}&category_id=0`
         );
         const bookmarkedProducts = res.data.filter((p: WishItem) => p.bookmarked);
         setWishList(bookmarkedProducts);

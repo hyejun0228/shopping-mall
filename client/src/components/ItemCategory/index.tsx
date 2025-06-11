@@ -13,7 +13,7 @@ const CATEGORY_LIST = [
 ];
 
 function ItemCategory() {
-  const userId = useUserStore((state) => state.userId);
+  const userId = useUserStore((state: any) => state.userId);
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(CATEGORY_LIST[0]);
 

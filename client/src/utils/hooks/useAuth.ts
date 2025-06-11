@@ -13,7 +13,7 @@ export function useAuth() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch('http://localhost/server/router.php?action=me', {
+        const res = await fetch('http://localhost/shopping-mall/server/router.php?action=me', {
           method: 'GET',
           credentials: 'include',
         });

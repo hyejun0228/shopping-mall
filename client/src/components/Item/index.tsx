@@ -54,8 +54,6 @@ function Item({ category }: ItemProps) {
   const isBookmarked = (product: Product) =>
     bookmarkState[product.id] !== undefined ? bookmarkState[product.id] : product.bookmarked;
 
-  console.log('Item component rendered with products:', products);
-
   return (
     <S.ProductGrid>
       {products.map(({ id, image_url, name, brand, price, bookmarked }) => (

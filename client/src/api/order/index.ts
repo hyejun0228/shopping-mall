@@ -4,7 +4,7 @@ import type { CreateOrderRequest } from './entity';
 
 export const createOrder = async (order: CreateOrderRequest) => {
   const response = await axios.post(
-    'http://localhost/server/order/create_order.php',
+    'http://localhost/shopping-mall/server/order/create_order.php',
     order,
     { withCredentials: true }
   );
@@ -12,7 +12,7 @@ export const createOrder = async (order: CreateOrderRequest) => {
 };
 
 export const fetchOrders = async (userId: number) => {
-  const response = await axios.get('http://localhost/server/order/get_orders.php', {
+  const response = await axios.get('http://localhost/shopping-mall/server/order/get_orders.php', {
     params: { user_id: userId },
     withCredentials: true,
   });

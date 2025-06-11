@@ -3,14 +3,14 @@ import type { Product, ProductDetail } from './entity';
 
 export const fetchProducts = async (categoryId: number, userId: number) => {
   const response = await axios.get<Product[]>(
-    `http://localhost/server/product/get_products.php?category_id=${categoryId}&user_id=${userId}`
+    `http://localhost/shopping-mall/server/product/get_products.php?category_id=${categoryId}&user_id=${userId}`
   );
   return response.data;
 };
 
 export const toggleBookmark = async (userId: number, productId: number) => {
   await axios.post(
-    'http://localhost/server/bookmark/toggle_bookmark.php',
+    'http://localhost/shopping-mall/server/bookmark/toggle_bookmark.php',
     { user_id: userId, product_id: productId },
     { withCredentials: true }
   );
@@ -18,7 +18,7 @@ export const toggleBookmark = async (userId: number, productId: number) => {
 
 export const fetchProductDetail = async (productId: string): Promise<ProductDetail> => {
   const response = await axios.get(
-    `http://localhost/server/product/get_product_detail.php?product_id=${productId}`,
+    `http://localhost/shopping-mall/server/product/get_product_detail.php?product_id=${productId}`,
     { withCredentials: true }
   );
   return response.data;
@@ -26,7 +26,7 @@ export const fetchProductDetail = async (productId: string): Promise<ProductDeta
 
 export const searchProducts = async (query: string): Promise<Product[]> => {
   const response = await axios.get(
-    `http://localhost/server/product/search_products.php?q=${encodeURIComponent(query)}`,
+    `http://localhost/shopping-mall/server/product/search_products.php?q=${encodeURIComponent(query)}`,
     { withCredentials: true }
   );
   return response.data.products;

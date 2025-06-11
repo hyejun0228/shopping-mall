@@ -26,7 +26,7 @@ function LoginPage() {
   });
 
   const loginUser = async (data: LoginForm) => {
-    const response = await fetch('http://localhost/server/router.php?action=login', {
+    const response = await fetch('http://localhost/shopping-mall/server/router.php?action=login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -3,7 +3,7 @@ import type { AddressForm, Address } from './entity';
 
 export const addAddress = async (form: AddressForm) => {
   const response = await axios.post(
-    'http://localhost/server/address/add_address.php',
+    'http://localhost/shopping-mall/server/address/add_address.php',
     form,
     { withCredentials: true }
   );
@@ -12,7 +12,7 @@ export const addAddress = async (form: AddressForm) => {
 
 export const fetchAddresses = async (userId: number) => {
   const response = await axios.get<Address[]>(
-    `http://localhost/server/address/get_addresses.php?user_id=${userId}`,
+    `http://localhost/shopping-mall/server/address/get_addresses.php?user_id=${userId}`,
     { withCredentials: true }
   );
   return response.data;
@@ -20,7 +20,7 @@ export const fetchAddresses = async (userId: number) => {
 
 export const updateAddress = async (form: AddressForm & { id: number }) => {
   const response = await axios.post(
-    'http://localhost/server/address/update_address.php',
+    'http://localhost/shopping-mall/server/address/update_address.php',
     form,
     { withCredentials: true }
   );
@@ -29,7 +29,7 @@ export const updateAddress = async (form: AddressForm & { id: number }) => {
 
 export const deleteAddress = async (id: number) => {
   const response = await axios.post(
-    'http://localhost/server/address/delete_address.php',
+    'http://localhost/shopping-mall/server/address/delete_address.php',
     { id },
     { withCredentials: true }
   );
@@ -38,7 +38,7 @@ export const deleteAddress = async (id: number) => {
 
 export const setMainAddress = async (userId: number, addressId: number) => {
   const response = await axios.post(
-    'http://localhost/server/address/set_main_address.php',
+    'http://localhost/shopping-mall/server/address/set_main_address.php',
     {
       user_id: userId,
       address_id: addressId,
