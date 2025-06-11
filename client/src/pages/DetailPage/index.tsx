@@ -7,6 +7,7 @@ import { fetchProductDetail } from '../../api/product';
 import { addToCart } from '../../api/cart';
 import { useUserStore } from '../../hooks/stores/useUserStore';
 import type { ProductDetail } from '../../api/product/entity';
+import LoginPromptModal from '../../components/LoginPromptModal';
 
 function DetailPage() {
   const { productId } = useParams<{ productId: string }>();
@@ -15,6 +16,7 @@ function DetailPage() {
   const [error, setError] = useState<string | null>(null);
   const isMobile = useMediaQuery({ maxWidth: 860 });
   const { userId } = useUserStore((state) => state);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (!productId) return;
@@ -36,6 +38,10 @@ function DetailPage() {
   }, [productId]);
 
   const handleAddToCart = async () => {
+    if (!userId) {
+      setShowModal(true);
+      return;
+    }
     if (!userId || !product) {
       alert('로그인이 필요하거나 상품 정보가 없습니다.');
       return;
@@ -81,6 +87,7 @@ function DetailPage() {
           <img src={sizeImage} alt={product.name} />
         </S.SizeWrapper>
       </S.DetailBodyWrapper>
+      {showModal && <LoginPromptModal onClose={() => setShowModal(false)} />}
     </S.Container>
   );
 }

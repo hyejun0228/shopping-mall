@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Item from '../Item';
 import * as S from './ItemCategory.styled';
+import { useUserStore } from '../../hooks/stores/useUserStore';
+import LoginPromptModal from '../LoginPromptModal';
 
 const CATEGORY_LIST = [
   { id: 1, name: 'Shoes' },
@@ -11,7 +13,17 @@ const CATEGORY_LIST = [
 ];
 
 function ItemCategory() {
+  const userId = useUserStore((state) => state.userId);
+  const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(CATEGORY_LIST[0]);
+
+  const handleCategoryChange = (category: { id: number; name: string }) => {
+    if (!userId) {
+      setShowModal(true);
+      return;
+    }
+    setSelectedCategory(category);
+  };
 
   return (
     <S.Container>
@@ -19,7 +31,7 @@ function ItemCategory() {
         {CATEGORY_LIST.map((category) => (
           <S.CategoryItem
             key={category.id}
-            onClick={() => setSelectedCategory(category)}
+            onClick={() => handleCategoryChange(category)}
             style={{
               fontWeight: category.id === selectedCategory.id ? 'bold' : 'normal',
             }}
@@ -29,6 +41,7 @@ function ItemCategory() {
         ))}
       </S.CategoryWrapper>
       <Item category={selectedCategory} />
+      {showModal && <LoginPromptModal onClose={() => setShowModal(false)} />}
     </S.Container>
   );
 }

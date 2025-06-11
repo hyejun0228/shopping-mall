@@ -6,23 +6,30 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchProducts, toggleBookmark } from '../../api/product';
 import type { Product } from '../../api/product/entity';
+import LoginPromptModal from '../LoginPromptModal';
 
 interface ItemProps {
   category: { id: number; name: string };
 }
 
 function Item({ category }: ItemProps) {
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const userId = useUserStore((state) => state.userId);
   const [bookmarkState, setBookmarkState] = useState<Record<number, boolean>>({});
 
   const { data: products = [], refetch } = useQuery<Product[]>({
-    queryKey: ['products', category.name, userId],
-    queryFn: () => fetchProducts(category.id, Number(userId)),
-    enabled: !!category?.name && !!userId,
+    queryKey: ['products', category.name, userId ?? 0],
+    queryFn: () => fetchProducts(category.id, Number(userId ?? 0)),
+    enabled: !!category?.name,
   });
 
   const handleToggleBookmark = async (productId: number) => {
+    if (!userId) {
+      setShowModal(true);
+      return;
+    }
+
     const prev =
       bookmarkState[productId] ?? products.find((p) => p.id === productId)?.bookmarked ?? false;
     const optimistic = !prev;
@@ -47,6 +54,8 @@ function Item({ category }: ItemProps) {
   const isBookmarked = (product: Product) =>
     bookmarkState[product.id] !== undefined ? bookmarkState[product.id] : product.bookmarked;
 
+  console.log('Item component rendered with products:', products);
+
   return (
     <S.ProductGrid>
       {products.map(({ id, image_url, name, brand, price, bookmarked }) => (
@@ -70,6 +79,7 @@ function Item({ category }: ItemProps) {
           </S.ItemDescription>
         </S.ProductCard>
       ))}
+      {showModal && <LoginPromptModal onClose={() => setShowModal(false)} />}
     </S.ProductGrid>
   );
 }
