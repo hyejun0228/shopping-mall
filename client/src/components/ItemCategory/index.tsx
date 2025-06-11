@@ -8,7 +8,6 @@ const CATEGORY_LIST = [
   { id: 3, name: 'Bottoms' }, // 하의
   { id: 4, name: 'Bags' }, // 가방
   { id: 5, name: 'Accessories' }, // 액세서리
-  { id: 6, name: 'Popular' }, // 인기상품
 ];
 
 function ItemCategory() {

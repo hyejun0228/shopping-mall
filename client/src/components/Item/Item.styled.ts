@@ -31,8 +31,11 @@ export const ProductImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 45% center; // ← 중심보다 약간 왼쪽으로 이동
   display: block;
+  background-color: #F2F2F2;
 `;
+
 
 
 

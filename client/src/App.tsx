@@ -8,6 +8,7 @@ import AuthPage from './pages/Auth/index';
 import DetailPage from './pages/DetailPage';
 import CartPage from './pages/CartPage';
 import BuyPage from './pages/BuyPage';
+import SearchPage from './pages/SearchPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/detail/:productId" element={<DetailPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/buy" element={<BuyPage />} />
+          <Route path="/search" element={<SearchPage />} />
         </Route>
         <Route path="auth" element={<AuthPage />}>
           <Route path="login" element={<LoginPage />} />

@@ -26,6 +26,10 @@ function Header() {
     navigate('/cart');
   };
 
+  const goToSearch = () => {
+    navigate('/search');
+  };
+
   return (
     <S.Header>
       <S.HeaderItemWrapper>
@@ -43,7 +47,9 @@ function Header() {
           <strong>VIVORA</strong>
         </S.HeaderTitle>
         <S.IconWrapper>
-          <SearchIcon />
+          <S.IconButton onClick={goToSearch} type="button">
+            <SearchIcon />
+          </S.IconButton>
           <S.IconButton onClick={goToCart} type="button">
             <ShoppingBagIcon />
           </S.IconButton>{' '}

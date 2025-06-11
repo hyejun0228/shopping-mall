@@ -11,7 +11,7 @@ export const Header = styled.header`
   border-bottom: 1px solid #e0e0e0;
   background: #fff;
   height: 72px;
-  z-index: 5;
+  z-index: 500;
   width: 100%;
   box-sizing: border-box;
 `;

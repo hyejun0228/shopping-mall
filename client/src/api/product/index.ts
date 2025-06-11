@@ -24,3 +24,11 @@ export const fetchProductDetail = async (productId: string): Promise<ProductDeta
   return response.data;
 };
 
+export const searchProducts = async (query: string): Promise<Product[]> => {
+  const response = await axios.get(
+    `http://localhost/server/product/search_products.php?q=${encodeURIComponent(query)}`,
+    { withCredentials: true }
+  );
+  return response.data.products;
+};
+

@@ -15,7 +15,7 @@ export const useUserStore = create<UserState>()(
       logout: () => set({ userId: null }),
     }),
     {
-      name: 'user-storage', // localStorage key
+      name: 'user-storage',
     }
   )
 );
