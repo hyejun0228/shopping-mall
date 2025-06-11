@@ -41,7 +41,7 @@ function LoginPage() {
       throw new Error(result.error || '로그인에 실패했습니다.');
     }
 
-    return result; // ← 여기서 user_id 포함된 결과 반환
+    return result;
   };
 
   const onSubmit = async (data: LoginForm) => {

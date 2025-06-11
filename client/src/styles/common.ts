@@ -96,7 +96,6 @@ function hexToRgba(hex: string, alpha: number) {
   const g = parseInt(replacedHex.substring(2, 4), 16);
   const b = parseInt(replacedHex.substring(4, 6), 16);
   const a =
-    // eslint-disable-next-line no-nested-ternary
     alpha !== undefined
       ? alpha
       : replacedHex.length === 8

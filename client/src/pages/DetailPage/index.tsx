@@ -4,7 +4,7 @@ import * as S from './DetailPage.styled';
 import useMediaQuery from '../../hooks/utils/useMediaQuery';
 import sizeImage from './../../assets/size-image.png';
 import { fetchProductDetail } from '../../api/product';
-import { addToCart } from '../../api/cart'; // ✅ 추가
+import { addToCart } from '../../api/cart';
 import { useUserStore } from '../../hooks/stores/useUserStore';
 import type { ProductDetail } from '../../api/product/entity';
 
@@ -42,7 +42,7 @@ function DetailPage() {
     }
 
     try {
-      await addToCart(Number(userId), product.id); // ✅ 수정된 부분
+      await addToCart(Number(userId), product.id);
       alert('장바구니에 추가되었습니다!');
     } catch (err) {
       console.error(err);

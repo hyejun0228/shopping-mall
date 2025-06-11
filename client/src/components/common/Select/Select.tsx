@@ -89,7 +89,6 @@ export default function Select({
   };
 
   const handleOptionListKeyDown: React.KeyboardEventHandler<HTMLUListElement> = (e) => {
-    // 이미 이벤트가 실행되는 중이라면 아무 동작도 하지 않습니다.
     if (e.defaultPrevented) return;
 
     switch (e.key) {

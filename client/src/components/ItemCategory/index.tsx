@@ -3,11 +3,11 @@ import Item from '../Item';
 import * as S from './ItemCategory.styled';
 
 const CATEGORY_LIST = [
-  { id: 1, name: 'Shoes' }, // 신발
-  { id: 2, name: 'Tops' }, // 상의
-  { id: 3, name: 'Bottoms' }, // 하의
-  { id: 4, name: 'Bags' }, // 가방
-  { id: 5, name: 'Accessories' }, // 액세서리
+  { id: 1, name: 'Shoes' },
+  { id: 2, name: 'Tops' },
+  { id: 3, name: 'Bottoms' },
+  { id: 4, name: 'Bags' },
+  { id: 5, name: 'Accessories' },
 ];
 
 function ItemCategory() {

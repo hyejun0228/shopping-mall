@@ -100,9 +100,7 @@ const createTypography = (fontSizes: typeof inputFontSize, fontWeights: typeof f
     (typo, [sizeKey, { fontSize, lineHeight, letterSpacing }]) =>
       Object.entries(fontWeights).reduce((acc, [weightKey, weightValue]) => {
         const styleValue: Record<string, string> = {
-          // fontFamily: 'Pretendard',
           fontWeight: weightValue,
-          // fontStyle: 'normal',
           fontSize,
           lineHeight,
           letterSpacing: letterSpacing ?? 'normal',

@@ -13,7 +13,6 @@ interface WishItem {
   name: string;
   brand?: string;
   image_url: string;
-  // 필요에 따라 필드 추가
 }
 
 function WishListPage() {
@@ -25,11 +24,9 @@ function WishListPage() {
 
     const fetchBookmarkedProducts = async () => {
       try {
-        // 모든 카테고리 상품을 가져오는 API 호출 (category_id=0 또는 생략 가능하게 서버 수정 필요)
         const res = await axios.get(
           `http://localhost/server/product/get_products.php?user_id=${userId}&category_id=0`
         );
-        // bookmarked가 true인 상품만 필터링
         const bookmarkedProducts = res.data.filter((p: WishItem) => p.bookmarked);
         setWishList(bookmarkedProducts);
       } catch (error) {
