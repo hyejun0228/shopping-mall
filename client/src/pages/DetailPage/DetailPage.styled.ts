@@ -16,7 +16,6 @@ export const Body = styled.div<ImageWrapperProps>`
   display: flex;
   max-width: 1200px;
   width: calc(100% - 20px);
-  /* min-height: calc(100vh - 160px); */
   padding: 40px 0 0 0;
   gap: 40px;
 
@@ -24,7 +23,6 @@ export const Body = styled.div<ImageWrapperProps>`
     isMobile &&
     `
     flex-direction: column;
-    padding: 0;
     width: 100%;
     min-height: calc(100vh - 80px);
     gap: 20px;
@@ -91,10 +89,16 @@ export const DescriptionTitle = styled.h2`
   color: #738293;
 `;
 
-export const ButtonWrapper = styled.div`
+export const ButtonWrapper = styled.div<ImageWrapperProps>`
   display: flex;
   gap: 8px;
   width: 100%;
+
+  ${({ isMobile }) =>
+    isMobile &&
+    `
+    padding: 12px 0 0 0;
+  `}
 `;
 
 export const Button = styled.button`
@@ -106,6 +110,7 @@ export const Button = styled.button`
   background-color: #021730;
   color: #ffffff;
   border-radius: 8px;
+  margin-bottom: 12px;
 `;
 
 export const DetailBodyWrapper = styled.div`
@@ -115,6 +120,8 @@ export const DetailBodyWrapper = styled.div`
   width: calc(100% - 20px);
   min-height: calc(100vh - 160px);
   padding: 40px 60px;
+
+
 `;
 
 export const SizeWrapper = styled.div`

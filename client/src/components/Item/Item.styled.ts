@@ -15,7 +15,7 @@ export const ProductCard = styled.button`
   overflow: hidden;
   text-align: center;
   gap: 8px;
-  border: none;;
+  border: none;
 `;
 
 export const ProductItemWrapper = styled.div`
@@ -35,9 +35,6 @@ export const ProductImage = styled.img`
   display: block;
   background-color: #F2F2F2;
 `;
-
-
-
 
 export const BookMark = styled.div<{ $active: boolean }>`
   position: absolute;
@@ -59,7 +56,6 @@ export const BookMark = styled.div<{ $active: boolean }>`
     }
   }
 `;
-
 
 export const ItemDescription = styled.div`
   display: flex;

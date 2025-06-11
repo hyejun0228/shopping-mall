@@ -69,7 +69,7 @@ function DetailPage() {
               )}
               <S.ItemPrice>{Number(product.price).toLocaleString()}원</S.ItemPrice>
             </div>
-            <S.ButtonWrapper>
+            <S.ButtonWrapper isMobile={isMobile}>
               <S.Button onClick={handleAddToCart}>장바구니에 담기</S.Button>
               <S.Button>구매하기</S.Button>
             </S.ButtonWrapper>
