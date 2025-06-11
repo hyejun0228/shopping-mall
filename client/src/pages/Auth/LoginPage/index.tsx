@@ -47,7 +47,6 @@ function LoginPage() {
   const onSubmit = async (data: LoginForm) => {
     try {
       const result = await loginUser(data);
-      console.log('✅ 로그인 응답:', result);
 
       if (result.user_id) {
         setUserId(result.user_id);

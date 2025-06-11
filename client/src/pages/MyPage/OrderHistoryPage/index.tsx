@@ -15,7 +15,6 @@ export default function OrderHistoryPage() {
       try {
         const data = await fetchOrders(Number(userId));
         setOrders(data);
-        console.log('주문 내역 불러오기 성공:', data);
       } catch (error) {
         console.error('주문 내역 불러오기 실패:', error);
       }
