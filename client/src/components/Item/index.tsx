@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import * as S from './Item.styled';
 import BookMarkIcon from '@/assets/svg/book-mark.svg?react';
-import { useUserStore } from '../../stores/useUserStore';
+import { useUserStore } from '../../hooks/stores/useUserStore';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -73,7 +73,7 @@ function Item({ category }: { category: { id: number; name: string } }) {
       {products.map(({ id, image_url, name, brand, price, bookmarked }) => (
         <S.ProductCard key={id} onClick={() => navigate(`/detail/${id}`)}>
           <S.ProductItemWrapper>
-            <img src={image_url} alt={name} />
+            <S.ProductImage src={image_url} alt={name} />
             <S.BookMark
               onClick={() => handleToggleBookmark(id)}
               $active={isBookmarked({ id, image_url, name, brand, price, bookmarked })}

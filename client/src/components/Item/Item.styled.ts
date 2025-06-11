@@ -14,23 +14,27 @@ export const ProductCard = styled.button`
   background: #fff;
   overflow: hidden;
   text-align: center;
-  gap: 12px;
+  gap: 8px;
   border: none;;
 `;
 
 export const ProductItemWrapper = styled.div`
   position: relative;
   width: 100%;
-  aspect-ratio: 1/1;
+  height: 212px;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
-
-  img {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  border-radius: 12px;
 `;
+
+
+export const ProductImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+`;
+
 
 export const BookMark = styled.div<{ $active: boolean }>`
   position: absolute;
@@ -63,12 +67,17 @@ export const ItemDescription = styled.div`
 `;
 
 export const ProductTitle = styled.h4`
-  display: flex;
-  align-items: start;
-  ${typo['body-1-sb']}
+  display: block;
+  width: 220px;
+  ${typo['body-2-sb']}
+  color: #021730;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ProductPrice = styled.p`
-  ${typo['body-3-m']}
-  color: #333;
+  ${typo['body-3-sb']}
+  color: #021730;
 `;

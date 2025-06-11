@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import * as S from './LoginPage.styled';
 import TextField from '../../../components/common/TextField';
 import { useNavigate } from 'react-router-dom';
-import { useUserStore } from '../../../stores/useUserStore';
+import { useUserStore } from '../../../hooks/stores/useUserStore';
 
 interface LoginForm {
   email: string;

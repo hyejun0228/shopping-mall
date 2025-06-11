@@ -1,7 +1,7 @@
 import * as S from './WishListPage.styled';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useUserStore } from '../../../stores/useUserStore';
+import { useUserStore } from '../../../hooks/stores/useUserStore';
 
 interface WishItem {
   id: number;
