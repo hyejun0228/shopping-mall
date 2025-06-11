@@ -3,9 +3,9 @@ import React, { createContext, useEffect, useMemo, useRef, useState } from 'reac
 import * as S from './Select.styled';
 import groupSlotByLabel from './utils/groupSlotByLabel';
 
-import useBooleanState from '@/hooks/utils/useBooleanState';
-import useOnClickOutside from '@/hooks/utils/useOnClickOutside';
-import useWrappingContext from '@/hooks/utils/useWrappingContext';
+import useBooleanState from '../../../hooks/utils/useBooleanState';
+import useOnClickOutside from '../../../hooks/utils/useOnClickOutside';
+import useWrappingContext from '../../../hooks/utils/useWrappingContext';
 
 interface SelectContextState {
   close: VoidFunction;
