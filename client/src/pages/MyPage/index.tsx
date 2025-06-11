@@ -3,6 +3,7 @@ import OrderHistoryPage from './OrderHistoryPage';
 import WishListPage from './WishListPage';
 import LoginInfoPage from './LoginInfoPage';
 import { useSearchParams } from 'react-router-dom';
+import AddressPage from './AddressPage';
 
 function MyPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -59,7 +60,7 @@ function MyPage() {
           {selectedMenu === '관심 상품' && <WishListPage />}
           {selectedMenu === '리뷰 쓰기' && <div>리뷰 쓰기 페이지</div>}
           {selectedMenu === '로그인 정보' && <LoginInfoPage />}
-          {selectedMenu === '주소록' && <div>주소록 페이지</div>}
+          {selectedMenu === '주소록' && <AddressPage />}
           {selectedMenu === '결제 정보' && <div>결제 정보 페이지</div>}
         </S.ContentSection>
       </S.SectionWrapper>

@@ -43,6 +43,7 @@ export const BookMark = styled.div<{ $active: boolean }>`
   width: 24px;
   height: 24px;
   cursor: pointer;
+  z-index: 100;
 
   svg {
     width: 100%;

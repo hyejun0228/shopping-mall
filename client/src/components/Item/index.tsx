@@ -1,62 +1,41 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import * as S from './Item.styled';
 import BookMarkIcon from '@/assets/svg/book-mark.svg?react';
 import { useUserStore } from '../../hooks/stores/useUserStore';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { fetchProducts, toggleBookmark } from '../../api/product';
+import type { Product } from '../../api/product/entity';
 
-interface Product {
-  id: number;
-  name: string;
-  price: string;
-  brand: string;
-  image_url: string;
-  bookmarked: boolean;
+interface ItemProps {
+  category: { id: number; name: string };
 }
 
-function Item({ category }: { category: { id: number; name: string } }) {
+function Item({ category }: ItemProps) {
   const navigate = useNavigate();
   const userId = useUserStore((state) => state.userId);
+  const [bookmarkState, setBookmarkState] = useState<Record<number, boolean>>({});
+
   const { data: products = [], refetch } = useQuery<Product[]>({
     queryKey: ['products', category.name, userId],
-    queryFn: async () => {
-      const res = await axios.get(
-        `http://localhost/server/product/get_products.php?category_id=${category.id}&user_id=${userId}`
-      );
-      return res.data;
-    },
+    queryFn: () => fetchProducts(category.id, Number(userId)),
     enabled: !!category?.name && !!userId,
   });
-
-  // 낙관적 UI 반영 위한 상태
-  const [bookmarkState, setBookmarkState] = useState<Record<number, boolean>>({});
 
   const handleToggleBookmark = async (productId: number) => {
     const prev =
       bookmarkState[productId] ?? products.find((p) => p.id === productId)?.bookmarked ?? false;
     const optimistic = !prev;
 
-    // 낙관적 UI 업데이트
     setBookmarkState((prevState) => ({
       ...prevState,
       [productId]: optimistic,
     }));
 
     try {
-      await axios.post(
-        'http://localhost/server/bookmark/toggle_bookmark.php',
-        {
-          user_id: userId,
-          product_id: productId,
-        },
-        { withCredentials: true }
-      );
-
-      // 성공 시 최신 데이터 재요청 (또는 fetchBookmarks 함수 호출)
+      await toggleBookmark(Number(userId), productId);
       refetch();
-    } catch (err) {
-      // 실패 시 롤백
+    } catch {
       setBookmarkState((prevState) => ({
         ...prevState,
         [productId]: prev,
@@ -75,7 +54,10 @@ function Item({ category }: { category: { id: number; name: string } }) {
           <S.ProductItemWrapper>
             <S.ProductImage src={image_url} alt={name} />
             <S.BookMark
-              onClick={() => handleToggleBookmark(id)}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleToggleBookmark(id);
+              }}
               $active={isBookmarked({ id, image_url, name, brand, price, bookmarked })}
             >
               <BookMarkIcon />

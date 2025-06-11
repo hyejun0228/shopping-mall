@@ -16,7 +16,7 @@ export const Title = styled.h2`
 export const ItemWishWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #D6DAE0;
+  /* background-color: #D6DAE0; */
 `;
 
 export const Item = styled.div`

@@ -23,6 +23,10 @@ function Header() {
     navigate('/mypage?menu=관심 상품');
   };
 
+  const goToCart = () => {
+    navigate('/cart');
+  };
+
   return (
     <S.Header>
       <S.HeaderItemWrapper>
@@ -42,7 +46,9 @@ function Header() {
         </S.HeaderTitle>
         <S.IconWrapper>
           <SearchIcon />
-          <ShoppingBagIcon />
+          <S.IconButton onClick={goToCart} type="button">
+            <ShoppingBagIcon />
+          </S.IconButton>
           <HamburgerIcon />
         </S.IconWrapper>
       </S.HeaderTitleWrapper>

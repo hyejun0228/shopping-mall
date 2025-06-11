@@ -73,3 +73,10 @@ export const IconWrapper = styled.div`
     cursor: pointer;
   }
 `;
+
+export const IconButton = styled.button`
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+`;
