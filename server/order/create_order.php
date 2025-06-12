@@ -67,7 +67,7 @@ foreach ($items as $item) {
 }
 $itemStmt->close();
 
-// 응답 반환
+
 echo json_encode(['success' => true, 'order_id' => $order_id]);
 $conn->close();
 ?>

@@ -22,7 +22,7 @@ if ($conn->connect_error) {
 }
 
 $keyword = $_GET['q'] ?? '';
-$keyword = '%' . $keyword . '%'; // 부분일치 검색
+$keyword = '%' . $keyword . '%';
 
 $stmt = $conn->prepare("SELECT * FROM products WHERE name LIKE ?");
 $stmt->bind_param("s", $keyword);

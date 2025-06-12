@@ -1,6 +1,5 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
-// CORS 헤더도 추가
 
 $userId = intval($_GET['user_id'] ?? 0);
 

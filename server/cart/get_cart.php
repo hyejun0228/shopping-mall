@@ -12,8 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
   exit();
 }
 
-// DB 연결
-require_once '../db/connect.php'; // 여기에선 $mysqli가 정의됨
+require_once '../db/connect.php'; 
 
 $user_id = $_GET['user_id'] ?? null;
 if (!$user_id) {

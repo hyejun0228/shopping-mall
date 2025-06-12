@@ -31,7 +31,7 @@ if (!$user_id || !$product_id) {
   exit();
 }
 
-// 삭제 대상 존재 확인 (디버깅용)
+
 $check = $conn->query("SELECT * FROM cart WHERE user_id = $user_id AND product_id = $product_id");
 if ($check->num_rows === 0) {
   http_response_code(404);

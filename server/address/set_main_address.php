@@ -26,10 +26,8 @@ if (!$user_id || !$address_id) {
   exit();
 }
 
-// 기존 기본 배송지 초기화
 $conn->query("UPDATE addresses SET is_main_address = 0 WHERE user_id = $user_id");
 
-// 해당 주소만 기본으로 설정
 $stmt = $conn->prepare("UPDATE addresses SET is_main_address = 1 WHERE id = ? AND user_id = ?");
 $stmt->bind_param("ii", $address_id, $user_id);
 

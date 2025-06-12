@@ -1,5 +1,5 @@
 <?php
-// CORS 설정
+
 header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
@@ -10,10 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
   exit();
 }
 
-// ✅ DB 연결
+
 $host = 'localhost';
-$user = 'root'; // DB 사용자명
-$pass = '';     // 비밀번호 (XAMPP는 기본적으로 빈 문자열일 수 있음)
+$user = 'root';
+$pass = ''; 
 $dbname = 'shopping_db';
 
 $conn = new mysqli($host, $user, $pass, $dbname);
@@ -23,9 +23,9 @@ if ($conn->connect_error) {
   exit();
 }
 
-// ✅ JSON 파싱
+
 $data = json_decode(file_get_contents("php://input"), true);
-error_log(print_r($data, true)); // ← 확인용 로그
+error_log(print_r($data, true));
 
 $user_id = isset($data['user_id']) ? intval($data['user_id']) : null;
 $name = $data['name'] ?? '';
@@ -35,14 +35,12 @@ $address = $data['address'] ?? '';
 $detailAddress = $data['detailAddress'] ?? '';
 $isMainAddress = !empty($data['isMainAddress']) ? 1 : 0;
 
-// ✅ 유효성 검사
 if (!$user_id || !$name || !$phone || !$postalCode || !$address || !$detailAddress) {
   http_response_code(400);
   echo json_encode(['error' => '필수 항목 누락']);
   exit();
 }
 
-// ✅ 기존 기본 배송지 초기화
 if ($isMainAddress) {
   $resetQuery = $conn->prepare("UPDATE addresses SET is_main_address = 0 WHERE user_id = ?");
   $resetQuery->bind_param("i", $user_id);
@@ -50,7 +48,6 @@ if ($isMainAddress) {
   $resetQuery->close();
 }
 
-// ✅ 주소 추가
 $stmt = $conn->prepare("
   INSERT INTO addresses (user_id, name, phone, postal_code, address, detail_address, is_main_address)
   VALUES (?, ?, ?, ?, ?, ?, ?)

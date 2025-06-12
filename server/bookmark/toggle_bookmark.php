@@ -31,7 +31,6 @@ if ($conn->connect_error) {
     exit();
 }
 
-// 북마크 존재 여부 확인
 $checkSql = "SELECT * FROM bookmarks WHERE user_id = ? AND product_id = ?";
 $checkStmt = $conn->prepare($checkSql);
 $checkStmt->bind_param("ii", $userId, $productId);
@@ -39,14 +38,14 @@ $checkStmt->execute();
 $result = $checkStmt->get_result();
 
 if ($result->num_rows > 0) {
-    // 북마크 제거
+    
     $deleteSql = "DELETE FROM bookmarks WHERE user_id = ? AND product_id = ?";
     $deleteStmt = $conn->prepare($deleteSql);
     $deleteStmt->bind_param("ii", $userId, $productId);
     $deleteStmt->execute();
     echo json_encode(["bookmarked" => false]);
 } else {
-    // 북마크 추가
+    
     $insertSql = "INSERT INTO bookmarks (user_id, product_id) VALUES (?, ?)";
     $insertStmt = $conn->prepare($insertSql);
     $insertStmt->bind_param("ii", $userId, $productId);
